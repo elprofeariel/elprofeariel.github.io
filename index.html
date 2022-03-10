@@ -1,0 +1,249 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Crear y manipular un arreglo de manera dinámica</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style>
+    body {
+      font-family: "Roboto",sans-serif;
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Crear y manipular un arreglo de manera dinámica"
+                  environment="web"
+                  feedback-link="mcariellopezdocencia@gmail.com">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <p><strong>Last Updated:</strong> 2022-03-10</p>
+<h2><strong>Que es un arreglo dinámico</strong></h2>
+<p>Un arreglo dinámico es una arreglo que podemos manipular su tamaño en tiempo de ejecución, es decir podríamos agregar elementos o eliminar elementos en cualquier momento, de esta manera no se desperdiciaría memoria como sí sucede con un arreglo estático cuyo tamaño no puede modificarse en tiempo de ejecución.</p>
+<h3><strong>Función malloc</strong></h3>
+<p>Para poder manipular la asignación de memoria de manera dinámica tendremos que usar la función malloc que se encuentra en la librería stdlib.h. Malloc tiene el trabajo de apartar un espacio de memoria del tamaño que se requiera y nos retorna la dirección de esa memoria . malloc tiene la siguiente estructura: malloc (tamaño en bytes de la memoria a asignar)</p>
+<p>Así, si necesitamos apartar un espacio de memoria de 8 bytes tendríamos que indicar malloc(8); y guardar el resultado en el apuntador que utilizaremos para nuestro arreglo dinámico.</p>
+<p>En ocasiones no sabremos de manera exacta la cantidad de bytes que se requiere apartar ya que no conocemos el tamaño en bytes de un tipo de dato en particular, para estos caso utilizaremos la función sizeof, así para apartar memoria para 8 enteros podríamos hacer lo siguiente:</p>
+<p>        int *arreglo=malloc(sizeof(int));</p>
+<h3><strong>Funcion sizeof</strong></h3>
+<p>La función sizeof se encuentra en la librería stdio.h, esta función nos permite conocer el tamaño en bytes de un tipo de dato, este tipo de dato puede ser simple (un tipo de datos primitivo como int, char, float)  o puede ser un tipo de dato complejo como una unión o un tipo de dato abstracto (struct ).</p>
+<p>La sintaxis de la función sizeof, es sizeof(tipo de dato), y nos retornará un valor entero indicando el tamaño en bytes del tipo de dato que se indica en el parámetro.</p>
+<h2><strong>Que haremos</strong></h2>
+<p>En este tutorial, haremos el código en lenguaje c donde vas a declarar un arreglo de manera dinámica y vamos a manipular sus datos e imprimir su contenido.</p>
+<aside class="warning"><p><strong>Note:</strong> Para poder programar lo indicado en este tutorial, puedes usar cualquier editor de código C y  un compilador de C. Para este tutorial utilizo en un equipo con Debian 9, un compilador gcc y el editor geany.</p>
+</aside>
+<h2><strong>Que aprenderás</strong></h2>
+<ul>
+<li>Como declarar un apuntador.</li>
+<li>Cómo usar la función malloc y la función sizeof</li>
+</ul>
+<h2><strong>Qué necesitas</strong></h2>
+<ul>
+<li>Un editor de código C</li>
+<li>El compilador de C</li>
+<li>Conocimientos del lenguaje C</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Inicio" duration="2">
+        <h2><strong>Crea tu programa C en geany</strong></h2>
+<p>Abre en tu computadora el editor geany, y elige del menú archivo/nuevo desde plantilla/ main.c</p>
+<p><img style="max-width: 550.50px" src="img/f00cc5864ea44a83.png"></p>
+<aside class="special"><p><strong>Note:</strong> En lugar de Geany puedes usar otro editor de código C, inclusive uno online</p>
+</aside>
+<h2><strong>Prepara el archivo </strong></h2>
+<p>Borra los comentarios y los argumentos de la función main, y guarda tu programa, en este ejemplo lo guardaré como arreglosdinamicos.c</p>
+<p><img style="max-width: 291.50px" src="img/e4286a28d56bd7b0.png"></p>
+<p><a href="https://github.com/googlecodelabs/your-first-pwapp/archive/master.zip" target="_blank"><paper-button class="colored" raised><iron-icon icon="file-download"></iron-icon>Download source code</paper-button></a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Crea y manipula el arreglo dinámico" duration="3">
+        <ul>
+<li>Declara la variable arreglo de tipo apuntador. int *arreglo;</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+        int *arreglo;
+        return 0;
+}    </code></pre>
+<ul>
+<li>Crear el espacio de memoria para nuestro arreglo de 10 posiciones, para esto usaremos las funciones malloc y sizeof. Recuerda que la función malloc se encuentra en la librería stdlib.hi, así que debemos incluirla en nuestro programa. Observa que vamos a multiplicar el resultado de la función sizeof, por un valor 10 para indicar que requiero apartar 10 espacios para enteros, así, nuestro arreglo será un arreglo de 10 posiciones.</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(){
+        int *arreglo;
+        arreglo=malloc(sizeof(int)*10);
+        return 0;
+}   </code></pre>
+<ul>
+<li>Ahora que tenemos nuestro arreglo dinámico de 10 posiciones, podemos manipularlo como lo haríamos con un arreglo normal, a través de su índice, que en este caso será desde 0 hasta 9. </li>
+<li>Vamos a insertar el valor 100 a la posición 2, y el valor 500 a la posición 3, e imprimimos su contenido.</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(){
+        int *arreglo;
+        arreglo=malloc(sizeof(int)*10);
+        arreglo[2]=100;
+        arreglo[3]=500;
+        printf(&#34;Arreglo en posición 2 es: %d\n&#34;, arreglo[2]);
+        printf(&#34;Arreglo en posición 3 es: %d\n&#34;, arreglo[3]);
+        return 0;
+}   </code></pre>
+<ul>
+<li>Ahora ya podemos ejecutar el programa y veríamos un resultado como el siguiente:</li>
+</ul>
+<p><img style="max-width: 306.50px" src="img/f68d2d0060b70bed.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Aumenta de tamaño el arreglo con malloc" duration="3">
+        <p>Para aumentar de tamaño el arreglo podemos usar la misma función malloc, si usamos la función malloc, para agrandar o reducir el tamaño de nuestro arreglo los datos que ya estaban almacenados serán eliminados</p>
+<ul>
+<li>Vamos a reasignar un nuevo tamaño del arreglo, ahora será de tamaño 15.</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(){
+        int *arreglo;
+        arreglo=malloc(sizeof(int)*10);
+        arreglo[2]=100;
+        arreglo[3]=500;
+        printf(&#34;Arreglo en posición 2 es: %d\n&#34;, arreglo[2]);
+        printf(&#34;Arreglo en posición 3 es: %d\n&#34;, arreglo[3]);
+        arreglo=malloc(sizeof(int)*15);
+        return 0;
+}</code></pre>
+<ul>
+<li>Después de reasignar el tamaño del arreglo volveremos a imprimir los valores de la posición 2 y 3 del arreglo para verificar su nuevo valor.</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(){
+        int *arreglo;
+        arreglo=malloc(sizeof(int)*10);
+        arreglo[2]=100;
+        arreglo[3]=500;
+        printf(&#34;Arreglo en posición 2 es: %d\n&#34;, arreglo[2]);
+        printf(&#34;Arreglo en posición 3 es: %d\n&#34;, arreglo[3]);
+        arreglo=malloc(sizeof(int)*15);
+        printf(&#34;Arreglo en posición 2 es: %d\n&#34;, arreglo[2]);
+        printf(&#34;Arreglo en posición 3 es: %d\n&#34;, arreglo[3]);
+        return 0;
+}</code></pre>
+<ul>
+<li>Ahora ya podemos ejecutar el programa y veríamos un resultado como el siguiente:</li>
+</ul>
+<p><img style="max-width: 316.50px" src="img/c1cab19ce8a595f2.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Aumenta de tamaño el arreglo con realloc" duration="3">
+        <p>Para aumentar de tamaño el arreglo podemos usar la función realloc, esta función a diferencia de la función malloc, al agrandar o reducir el tamaño de nuestro arreglo los datos que ya estaban almacenados no serán eliminados. La función realloc tiene la siguiente sintaxis</p>
+<p><strong>realloc(puntero, nuevo tamaño);</strong></p>
+<p>Nos solicita el puntero original a donde queremos aumentar o disminuir su tamaño y nos retorna una referencia al nuevo espacio de memoria.</p>
+<ul>
+<li>Vamos a reasignar un nuevo tamaño del arreglo, ahora será de tamaño 15 pero con la función realloc.</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(){
+        int *arreglo;
+        arreglo=malloc(sizeof(int)*10);
+        arreglo[2]=100;
+        arreglo[3]=500;
+        printf(&#34;Arreglo en posición 2 es: %d\n&#34;, arreglo[2]);
+        printf(&#34;Arreglo en posición 3 es: %d\n&#34;, arreglo[3]);        
+        arreglo=realloc(arreglo, sizeof(int)*15);        
+        return 0;
+}</code></pre>
+<ul>
+<li>Después de reasignar el tamaño del arreglo con realloc volveremos a imprimir los valores de la posición 2 y 3 del arreglo para verificar su nuevo valor.</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(){
+        int *arreglo;
+        arreglo=malloc(sizeof(int)*10);
+        arreglo[2]=100;
+        arreglo[3]=500;
+        printf(&#34;Arreglo en posición 2 es: %d\n&#34;, arreglo[2]);
+        printf(&#34;Arreglo en posición 3 es: %d\n&#34;, arreglo[3]);        
+        arreglo=realloc(arreglo, sizeof(int)*15);
+        printf(&#34;Arreglo en posición 2 es: %d\n&#34;, arreglo[2]);
+        printf(&#34;Arreglo en posición 3 es: %d\n&#34;, arreglo[3]);
+        return 0;
+}</code></pre>
+<ul>
+<li>Ahora ya podemos ejecutar el programa y veríamos un resultado como el siguiente:</li>
+</ul>
+<p><img style="max-width: 316.50px" src="img/3fa28f977a0697f4.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Terminamos" duration="0">
+        <p>Ahora ya puedes crear arreglos de tamaño variable sin perder sus valores.</p>
+<p>Has visto y aprendido el funcionamiento de las funciones malloc, realloc y sizeof. </p>
+<p>Puedes revisar  el siguiente video sobre apuntadores en mi canal</p>
+<google-youtube fluid video-id="1KtPj2TxIbI"></google-youtube>
+<h2>Y ahora ?</h2>
+<p>Puedes encontrar videos sobre programación en mi canal de youtube</p>
+<p><a href="https://www.youtube.com/elprofeariel" target="_blank">https://www.youtube.com/elprofeariel</a></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>
