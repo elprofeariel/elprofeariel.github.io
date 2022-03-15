@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-03-14T22:37:55Z",
+  "id": "hola_mundo_c_java",
+  "duration": 4,
+  "title": "Hola Mundo en C y en Java",
+  "authors": "Ariel López Rodríguez",
+  "summary": "En este codelab aprenderemos a hacer nuestro primer hola mundo en lenguaje C y en lenguaje Java.",
+  "source": "1y8RhX33dkdqFex3GmaOl4GqpBHXHQ191NIXZhSh4OsM",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": null,
+  "tags": [],
+  "feedback": "mcariellopezdocencia@gmail.com",
+  "url": "hola_mundo_c_java"
+}
