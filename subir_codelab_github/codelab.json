@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-03-15T15:26:25Z",
+  "id": "subir_codelab_github",
+  "duration": 14,
+  "title": "subir tu codelab a GITHUB",
+  "authors": "Ariel López Rodríguez",
+  "summary": "Sube tu codelab a GITHUB",
+  "source": "1XuvQrGSaQL7T2_bnLK5bAYYDzMyGVPVZd6_Msh9YS2o",
+  "theme": "material-did-ctico",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Material didáctico"
+  ],
+  "tags": [
+    "web"
+  ],
+  "feedback": "mcariellopezdocencia@gmail.com",
+  "url": "subir_codelab_github"
+}
