@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-03-14T23:57:36Z",
+  "id": "comocrearcodelabs",
+  "duration": 21,
+  "title": "Crear un codelab con un documento de google",
+  "authors": "Ariel López Rodríguez",
+  "summary": "Crear tu primer codelab",
+  "source": "1RFSLTrmOFAziF0j3cMYgLNfmKV5Axsd7HCIqB7EzwdE",
+  "theme": "material-did-ctico",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Material didáctico"
+  ],
+  "tags": [
+    "web"
+  ],
+  "feedback": "mcariellopezdocencia@gmail.com",
+  "url": "comocrearcodelabs"
+}

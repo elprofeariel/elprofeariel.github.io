@@ -1,0 +1,188 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Crear un codelab con un documento de google</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="comocrearcodelabs"
+                  title="Crear un codelab con un documento de google"
+                  environment="web"
+                  feedback-link="mcariellopezdocencia@gmail.com">
+    
+      <google-codelab-step label="Introducción" duration="0">
+        <p><strong>Last Updated:</strong> 2022-03-14</p>
+<h2 is-upgraded><strong>Que es un codelab</strong></h2>
+<p>Los codelab son tutoriales creados para la enseñanza de distintos lenguajes de programación. Ejemplos de estos codelabs los podemos encontrar en <a href="https://codelabs.developers.google.com/" target="_blank">https://codelabs.developers.google.com/</a> . El formato de presentación de estos tutoriales permiten al usuario seguir las instrucciones de manera más fluida y menos tediosa.</p>
+<p>Google nos proporciona las herramientas de creación para que nosotros podamos crear nuestros propios tutoriales en el mismo formato en que ellos lo realizan, los tutoriales obtenidos los podemos publicar en nuestros propios servidores, utilizar servicios gratuitos de hospedaje en la web o en un servicio de hospedaje de pago.</p>
+<h2 is-upgraded><strong>Que haremos en este tutorial</strong></h2>
+<p>En este tutorial crearemos nuestro primer codelab  usando una plantilla de documento que nos proporciona google, y las herramientas necesarias para la generación de nuestro codelab.</p>
+<h2 is-upgraded><strong>Que aprenderás</strong></h2>
+<ul>
+<li>Las herramientas necesarias para crear nuestro codelab</li>
+<li>Cómo escribir nuestro codelab usando una plantilla de google doc.</li>
+<li>Cómo generar y visualizar nuestro codelab.</li>
+</ul>
+<h2 is-upgraded><strong>Qué vamos a necesitar</strong></h2>
+<ul>
+<li>Una cuenta de gmail</li>
+<li>Conocimiento del manejo de la terminal o línea de comandos</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Inicio" duration="2">
+        <h2 is-upgraded><strong>Crea una copia de la plantilla de  google para la creación de codelabs</strong></h2>
+<p>En esta URL puede encontrar la plantilla. <a href="https://docs.google.com/document/d/1E6XMcdTexh5O8JwGy42SY3Ehzi8gOfUGiqTiUX6N04o/edit" target="_blank">https://docs.google.com/document/d/1E6XMcdTexh5O8JwGy42SY3Ehzi8gOfUGiqTiUX6N04o/edit</a></p>
+<p class="image-container"><img style="width: 624.00px" src="img/3ae3cbb37614d920.png"></p>
+<p>Vamos al menú <strong>archivo</strong> y seleccionamos la opción<strong> Hacer una copia</strong></p>
+<p class="image-container"><img style="width: 334.00px" src="img/3db4f238d17f2c18.png"></p>
+<p>Colocamos un nombre a nuestro documento e indicamos la ubicación donde guardaremos nuestro  documento.</p>
+<aside class="special"><p><strong>Nota:</strong> Se recomienda crear una carpeta especial donde se van a almacenar nuestros codelabs.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Modificar el contenido del codelab" duration="3">
+        <ul>
+<li>Asignar el nombre de nuestro tutorial.</li>
+</ul>
+<p class="image-container"><img style="width: 624.00px" src="img/b78656b733a7c84b.png"></p>
+<ul>
+<li>Vamos a modificar la información de nuestro codelab, para ello vamos a modificar los metadatos que se encuentran en la tabla debajo del título de nuestro tutorial.</li>
+<li>Si se necesita una información más detallada del formtao del documentolo encontraremos en: <a href="https://github.com/googlecodelabs/tools/blob/main/FORMAT-GUIDE.md" target="_blank">https://github.com/googlecodelabs/tools/blob/main/FORMAT-GUIDE.md</a></li>
+<li>Para efectos de este tutorial solo dejaremos los valores básicos.</li>
+<li><strong>Summary</strong>: Un breve resumen de lo que aprenderemos o haremos en este codelab</li>
+<li><strong>URL</strong>: un nombre que indique de qué trata el codelab, este nombre será el nombre de la carpeta donde se crearán los archivos de nuestro codelab.</li>
+<li><strong>Status:</strong> Un valor de la siguiente lista (Draft, Published, Deprecated, Hidden), que indica el estado de nuestro codelab.</li>
+<li><strong>Feedback Link:</strong> Un enlace a un sitio donde podrían dejarnos comentarios sobre nuestro codelab.</li>
+<li><strong>Author :</strong> El autor del codelab.</li>
+</ul>
+<p class="image-container"><img style="width: 618.00px" src="img/f5fe52dcbd64be4f.png"></p>
+<ul>
+<li>El índice se actualizará de forma automática, así que nos vamos directamente al contenido del documento.</li>
+<li>Cada título de nuestro documento se convertirá en una sección de nuestro codelab. Así que podemos agregar o eliminar los títulos que sean necesarios para nuestro codelab.</li>
+<li>Después del título, dejaremos el texto Duration, y seguido indicaremos el tiempo aproximado que el alumno tardaría en terminar de realizar las actividades de la sección. </li>
+<li>Dejaremos para este ejemplo solo 4 títulos incluyendo la introducción </li>
+<li>En la primer parte (Introducción) colocaremos lo siguiente, aunque podemos colocar la información que se considere necesaria para el codelab que estamos creando.</li>
+</ul>
+<p class="image-container"><img style="width: 596.00px" src="img/d2ee5e828c08faa0.png"></p>
+<ul>
+<li>En la segunda sección podemos colocar lo siguiente.</li>
+</ul>
+<p class="image-container"><img style="width: 591.00px" src="img/ae294677e9b16631.png"></p>
+<ul>
+<li><code>En la tercera sección podemos colocar lo siguiente:</code></li>
+</ul>
+<p class="image-container"><img style="width: 597.00px" src="img/4d2717ff012a8488.png"></p>
+<ul>
+<li><code>Y en la última sección podemos colocar</code>  un mensaje de terminación del tutorial.</li>
+</ul>
+<p class="image-container"><img style="width: 624.00px" src="img/74b88e2bb91b3f63.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Previsualizar tu codelab" duration="3">
+        <p>Para poder previsualizar nuestro codelab, debemos instalar una extensión para google Chrome que nos permite realizarlo, la  extensión a instalar es : <a href="https://chrome.google.com/webstore/detail/preview-codelab/lhojjnijnkiglhkggagbapfonpdlinji" target="_blank">https://chrome.google.com/webstore/detail/preview-codelab/lhojjnijnkiglhkggagbapfonpdlinji</a></p>
+<p class="image-container"><img style="width: 624.00px" src="img/57bf38d99d7388ff.png"></p>
+<p>Después de instalar la extensión, solo debemos tener abierto nuestro documento y ejecutar la extensión, debemos darle los permisos para que pueda tener acceso a nuestro documento y listo, tendremos la previsualización de nuestro codelab.</p>
+<p class="image-container"><img style="width: 595.28px" src="img/ea3efc7d7a3127c.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Exporta tu documento a formato de codelab" duration="10">
+        <p>Para poder exportar nuestro documento al formato codelab, usaremos la herramienta claat que podemos descargar desde : <a href="https://github.com/googlecodelabs/tools/releases" target="_blank">https://github.com/googlecodelabs/tools/releases</a>, descargamos la versión que necesitamos dependiendo nuestro sistema operativo, en mi caso debian 9, por lo que vamos a descargar &#34;<a href="https://github.com/googlecodelabs/tools/releases/download/v2.2.4/claat-linux-amd64" target="_blank">claat-linux-amd64</a>&#34;. </p>
+<p>Aunque podemos simplemente copiar el archivo claat-linux-amd64 a la carpeta donde vamos a exportar nuestro codelab, también podemos en linux agregar un enlace al <strong>PATH</strong> para tenerlo disponible desde cualquier punto, en debian agregamos al archivo <strong>/etc/.bashrc</strong> la siguiente línea.</p>
+<pre><code>export PATH=$PATH:/home/user/bin/</code></pre>
+<aside class="special"><p><strong>Nota:</strong> Debemos sustituir /user/bin/ por la carpeta donde vamos a almacenar el archivo claat-linux-amd64</p>
+</aside>
+<p><em>Que necesitamos:</em></p>
+<ol type="1" start="1">
+<li>Si observamos la URL de nuestro documento que estamos editando en nuestro navegador web y vamos a observar  algo similar a : <a href="https://docs.google.com/document/d/" target="_blank">https://docs.google.com/document/d/</a>, seguido de un código formado por números y letras, vamos a copiar ese código.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/f7fae806f5649689.png"></p>
+<ol type="1" start="2">
+<li>Abrimos la terminal. </li>
+<li>Nos ubicamos en la carpeta donde vamos a crear nuestro codelab. En mi caso voy a usar la carpeta &#34;/Descargas/primercodelab&#34;</li>
+</ol>
+<pre><code>$ cd Descargas/primercodelab/</code></pre>
+<ol type="1" start="4">
+<li>Ahora vamos a exportar nuestro documento con la siguiente orden</li>
+</ol>
+<pre><code> $claat-linux-amd64 export 1y8RhX33dkdqFex3GmaOl4GqpBHXHQ191NIXZhSh4OsM
+ok        hola_mundo_c_java</code></pre>
+<aside class="special"><p><strong>Nota:</strong> La primera vez  se nos solicitará una clave de acceso a nuestro documento, solo debemos seguir el enlace que nos aparece en la terminal, dar los permisos y copiar la clave de acceso de nuestro documento. Que colocaremos en nuestra terminal.</p>
+</aside>
+<ol type="1" start="5">
+<li>Nos aparecerá la palabra ok seguido por el nombre que colocamos en los metadatos del inicio del documento, lo que significa que el tutorial ha sido generado con éxito.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Revisar nuestro codelab resultado" duration="3">
+        <ol type="1" start="1">
+<li>Para poder visualizar de manera adecuada nuestro codelab generado será necesario cargarlo desde  un servidor web local, para esto utlizaremos la extensión : <a href="https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb" target="_blank">https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb</a></li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/19f24700915d8d.png"></p>
+<ol type="1" start="2">
+<li>Elegimos iniciar aplicación</li>
+<li>Elegimos CHOOSE FOLDER y localizamos la carpeta donde creamos nuestro codelab.</li>
+</ol>
+<p class="image-container"><img style="width: 410.00px" src="img/44d39826f651b243.png"></p>
+<ol type="1" start="4">
+<li>A continuación damos click en el enlace debajo de Web Server URL(s), que nos abrirá nuestro tutorial.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/44984eed04f3cabe.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Terminamos" duration="0">
+        <p>Ahora que ya tienes tu codelab creado, ya puedes publicarlo en tu sitio de github, u otro hosting gratuito o comercial.</p>
+<h2 is-upgraded>Y ahora ?</h2>
+<p>Puedes encontrar mas tutoriales en mi canal de youtube</p>
+<p><a href="https://www.youtube.com/elprofeariel" target="_blank">https://www.youtube.com/elprofeariel</a></p>
+<h3 is-upgraded><strong>Referencias</strong></h3>
+<ul>
+<li><a href="https://medium.com/@mariopce/tutorial-how-to-make-tutorials-using-google-code-labs-gangdam-style-d62b35476816" target="_blank">Tutorial how to make tutorials using Google Code Labs. Gangnam style.</a> </li>
+<li><a href="https://codelabs.solace.dev/codelabs/codelab-4-codelab/index.html?index=..%2F..index#7" target="_blank">Codelab to Create a Codelab</a></li>
+<li><a href="https://www.marcd.dev/codelab-4-codelab/#3" target="_blank">CodeLab to Create a CodeLab</a></li>
+<li><a href="https://dev.to/bpetetot/build-your-own-codelab-with-google-codelab-1hdi" target="_blank">Build your own Codelab with Google Codelab</a></li>
+<li><a href="https://medium.com/@zarinlo/publish-technical-tutorials-in-google-codelab-format-b07ef76972cd" target="_blank">Publish Technical Tutorials in Google Codelab Format</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
