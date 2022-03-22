@@ -234,10 +234,10 @@ char pop(Pila *pila){
         <p>Para facilitar la reutilización de código, vamos a crear en una librería externa todo el código para realizar la conversión de expresiones de infija a postfija </p>
 <p>Crearemos un archivo postfija.h donde crearemos la función infijaToPostfija y las funciones necesarias para la realización del algoritmo.</p>
 <h3 is-upgraded><strong>Creando la función nivelDePrecedencia.</strong></h3>
-<p><code>Esta función nos permitirá conocer el nivel de precedencia que tiene un operador, pudiendo ser 1 si es suma o resta, 2 si es producto o división, y 3 si es una potencia.</code></p>
-<p><code>Así la función tendría la siguiente estructura:</code></p>
-<p><strong><code>int nivelDePrecedencia(char operador);</code></strong></p>
-<p><code>Dónde operador es el operador a obtener su nivel de precedencia.</code></p>
+<p>Esta función nos permitirá conocer el nivel de precedencia que tiene un operador, pudiendo ser 1 si es suma o resta, 2 si es producto o división, y 3 si es una potencia.</p>
+<p>Así la función tendría la siguiente estructura:</p>
+<p><strong>int nivelDePrecedencia(char operador);</strong></p>
+<p>Dónde operador es el operador a obtener su nivel de precedencia.</p>
 <p><strong><code>Función nivelDePrecedencia</code></strong></p>
 <pre><code>int nivelDePrecedencia(char operador){
         int nivel=0;
