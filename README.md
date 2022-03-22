@@ -1,5 +1,6 @@
-# elprofeariel.github.io
-Sitio web del profe Ariel
+# EL PROFE ARIEL
+
+Sitio web personal
 
 Encuentra material didactico para aprender y enseñar programación estructurada, estructuras de datos y Programación Orientada a Objetos
 
