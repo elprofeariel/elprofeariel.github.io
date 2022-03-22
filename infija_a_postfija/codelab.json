@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-03-22T18:58:08Z",
+  "id": "infija_a_postfija",
+  "duration": 37,
+  "title": "Convertir de notación Infija a Postfija",
+  "authors": "Ariel López Rodríguez",
+  "summary": "Algoritmo para convertir de notación Infija a Postfija",
+  "source": "1uddefY14bWhoy1PG8-3s4jkt3Z5NNpnBqU80xT7T2dI",
+  "theme": "estructuras-de-datos",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Estructuras de Datos"
+  ],
+  "tags": [
+    "escritorio"
+  ],
+  "feedback": "mcariellopezdocencia@gmail.com",
+  "url": "infija_a_postfija"
+}

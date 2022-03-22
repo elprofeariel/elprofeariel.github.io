@@ -1,0 +1,577 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Convertir de notación Infija a Postfija</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="infija_a_postfija"
+                  title="Convertir de notación Infija a Postfija"
+                  environment="web"
+                  feedback-link="mcariellopezdocencia@gmail.com">
+    
+      <google-codelab-step label="Introducción" duration="0">
+        <p><strong>Last Updated:</strong> 2022-03-22</p>
+<h2 is-upgraded><strong>Notación infija y postfija</strong></h2>
+<p>Las notaciones infija y postfija son formas de representar a una expresión aritmética, cada una nos indica la posición de los operadores en la expresión aritmética, de tal forma que infija denota la posición de los operadores en medio de los operandos, esta sería la forma habitual en la que nosotros escribimos las expresiones aritméticas, así la suma de A y B la representamos como A + B, por otro lado,  la notación postfija nos dice que los operadores se colocan al final de los operandos. Así la expresión infija  A + B , se representa en notación postfija como A B +.</p>
+<p>En la notación postfija no se requiere el uso de paréntesis tal como se usa en la expresión infija, ya que la expresión A * (B + C) en notación postfija se representa como ABC+*, la precedencia de operadores queda expresada de forma implícita por el orden de aparición de  los operadores.</p>
+<p>Para poder convertir una expresión infija a postfija se debe tener en cuenta la aparición de paréntesis y la prioridad de los operadores, así podemos convertir manualmente una expresión infija a postfija haciendo lo siguiente:</p>
+<ol type="1" start="1">
+<li>Dada una expresión infija, convertir primero la operación de mayor precedencia.</li>
+<li>Al resolver una operación, el resultado de la misma se considerará ahora como un solo operando.</li>
+<li>Regresar al paso 1 hasta convertir toda la expresión.</li>
+</ol>
+<h2 is-upgraded><strong>Ejemplo 1.  A + B   -&gt;  AB+</strong></h2>
+<ol type="1" start="1">
+<li>Juntamos los dos operandos, y colocamos el operador al final.</li>
+</ol>
+<h2 is-upgraded>Ejemplo 2 :  A + B * D  -&gt; <strong> A B D * +</strong></h2>
+<ol type="1" start="1">
+<li>Tomar la operación con mayor prioridad, que sería B * D</li>
+<li>Convertir esta operación a postfija, quedanDo <strong>B D *</strong></li>
+<li>Agregar este resultado a la expresión original, quedando así: A + <strong>B D*</strong></li>
+<li>Podemos considerar el resultado del punto 2 como un operando C, con lo que la expresión quedaría como<strong> A + C, </strong>esto para facilitar su conversión a postfija.</li>
+<li>Convertimos <strong>A + C  </strong>a postfija  que sería <strong>A C + .</strong></li>
+<li>Ya  podemos nuevamente sustituir el valor de C, quedando<strong> A B D * +</strong></li>
+</ol>
+<h2 is-upgraded>Ejemplo 3:  A + C + D*F +  A  -&gt;  <strong>AC+DF*+A+   </strong></h2>
+<ol type="1" start="1">
+<li><h3 is-upgraded>Tomar la operación con mayor prioridad (D*F).</h3>
+</li>
+<li>Convertir esta operación a postfija, resultado <strong>D F *</strong> , podemos llamar a este elemento como<strong> X. (X= D F *)</strong></li>
+<li>Reescribir la expresión sustituyendo X,  A + C + <strong>X</strong> + A</li>
+<li>Como los operadores son de igual prioridad en sumas y restas, resolveremos de izquierda a derecha.</li>
+<li>Tomamos la operación <strong>A + C</strong>, convertimos a postfija  <strong>A C +</strong>, le colocamos un nombre como <strong>W</strong> y sustituimos en la expresión del paso 3 (<strong>W = A C +</strong> ).</li>
+<li>Reescribir la expresión sustituyendo W,  <strong>W</strong> + <strong>X</strong> + A</li>
+<li>Como los operadores son de igual prioridad en sumas y restas, resolveremos de izquierda a derecha.</li>
+<li>Tomamos la operación <strong>W + X</strong>, convertimos a postfija  <strong>W X +</strong>, le colocamos un nombre como <strong>Y</strong> y sustituimos en la expresión del paso 3. (<strong>Y= W X + </strong>)</li>
+<li>Reescribir la expresión sustituyendo Y,  <strong>Y</strong> + A</li>
+<li>Como los operadores son de igual prioridad en sumas y restas, resolveremos de izquierda a derecha.</li>
+<li>Tomamos la operación <strong>Y + A</strong>, convertimos a postfija  <strong>Y A +</strong></li>
+<li>Sustituir el valor de Y del paso 8 , W X + A +</li>
+<li>Sustituir el valor de W del paso 5 , A C + X + A +</li>
+<li>Sustituir el valor de X del paso 2, <strong>A C + D F * + A+ </strong></li>
+</ol>
+<h2 is-upgraded>Ejemplo 4:  A + B * (C + D) -&gt; <strong>A B C D + * +</strong></h2>
+<ol type="1" start="1">
+<li><h3 is-upgraded>Tomar la operación con mayor prioridad (C + D), debido a los paréntesis, esta operación tiene la mayor prioridad..</h3>
+</li>
+<li>Convertir esta operación a postfija, resultado <strong> C D +</strong> , podemos llamar a este elemento como<strong> X. (X= C D +)</strong></li>
+<li>Reescribir la expresión sustituyendo X y eliminando los paréntesis,  A + B * <strong>X</strong></li>
+<li>Tomamos la operación con mayor prioridad.</li>
+<li>Tomamos la operación <strong>B * X</strong>, convertir a postfija  <strong>B X *</strong>, le colocamos un nombre como <strong>W</strong> y sustituimos en la expresión del paso 3 (<strong>W = B X *</strong> ).</li>
+<li>Reescribir la expresión sustituyendo W,  <strong>A + W</strong></li>
+<li>Tomamos la operación <strong>A + W</strong>, convertimos a postfija  <strong>A W +</strong></li>
+<li>Sustituir el valor de W del paso 5 , A B X * +</li>
+<li>Sustituir el valor de X del paso 2, <strong> A B C D + * +</strong></li>
+</ol>
+<h2 is-upgraded><strong>¿Qué vamos a hacer? </strong></h2>
+<p>En este tutorial, aprenderemos a realizar el código en lenguaje de un programa que permite convertir una expresión en notación infija a notación postfija.</p>
+<aside class="warning"><p><strong>Nota:</strong> Para poder programar lo indicado en este tutorial, se requiere conocimientos de la estructura de Datos PILA y su forma de implementación en lenguaje C. Por consiguiente el lector debe contar con conocimientos en programación en lenguaje C.</p>
+</aside>
+<h2 is-upgraded><strong>Que aprenderás</strong></h2>
+<ul>
+<li>A diferenciar la notación infija y postfija</li>
+<li>Un algoritmo para la conversión de notación infija a postfija</li>
+<li>La implementación del algoritmo en lenguaje C</li>
+</ul>
+<h2 is-upgraded><strong>Qué se requiere</strong></h2>
+<ul>
+<li>Un editor y compilador de código C</li>
+<li>Conocimientos sobre pilas en lenguaje C</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Describiendo el algoritmo" duration="5">
+        <p>Aunque en la sección anterior se ha descrito una forma manual de poder convertir una expresión infija a postfija, el procedimiento planteado sería complicado de pasar a un programa de computadora.</p>
+<p>A continuación se presenta un algoritmo basado en algoritmos planteados en bibliografía existente sobre estructuras de datos, que utiliza la estructura de datos Pila para permitir una convertir sencilla de una expresión infija a postfija, a continuación se observa el algoritmo y en la siguiente sección vamos a traducir el algoritmo a un programa en lenguaje C.</p>
+<ol type="1" start="1">
+<li><strong>expresion</strong> = expresion infija</li>
+<li>Asignar una cadena vacía a la expresión postfija.</li>
+<li><strong>MIENTRAS</strong> hay elementos en la <strong>expresión HACER</strong></li>
+</ol>
+<ol type="1" start="1">
+<li>Guardar en  <strong>elemento</strong> al siguiente elemento de la expresión.</li>
+<li><strong>SI</strong> (<strong>elemento</strong> es operando)</li>
+</ol>
+<p>Agregar <strong>elemento</strong> a expresión postfija</p>
+<ol type="1" start="3">
+<li><strong>SI NO, SI (elemento es operador)</strong></li>
+</ol>
+<p><strong>SI  (</strong>PILA no está vacía)</p>
+<p><strong>HACER</strong></p>
+<p><strong>operador = pop(pila)</strong></p>
+<p><strong>SI ( operador tiene mayor o igual Prioridad que elemento)</strong></p>
+<ol type="1" start="1">
+<li>Agregar elemento a expresión postfija</li>
+<li><strong>Bandera seDebeContinuar=true</strong></li>
+</ol>
+<p><strong>SINO</strong></p>
+<ol type="1" start="3">
+<li><strong>Bandera seDebeContinuar=false</strong></li>
+<li>Insertar operador a la pila (push (pila,operador))</li>
+</ol>
+<p><strong>FIN DEL SI</strong></p>
+<p><strong>FIN DEL MIENTRAS (</strong>PILA no está vacía  y   <strong>seDebeContinuar) </strong></p>
+<p><strong>FIN DEL SI</strong></p>
+<p>Insertar elemento a la pila (push (pila,elemento))</p>
+<ol type="1" start="4">
+<li><strong>SI NO, SI</strong> (elemento es  paréntesis izquierdo)</li>
+</ol>
+<p>Insertar elemento a la pila (push (pila,elemento))</p>
+<ol type="1" start="5">
+<li><strong>SI NO,SI (</strong>elemento es paréntesis derecho<strong>)</strong></li>
+</ol>
+<p><strong>operador = pop(pila)</strong></p>
+<p><strong>MIENTRAS ( </strong>PILA no está vacía y operador no es paréntesis izquierdo)<strong>) HACER</strong></p>
+<p>Agregar operador a expresión postfija</p>
+<p>operador = pop(pila)</p>
+<p><strong>FIN DEL MIENTRAS</strong></p>
+<ol type="1" start="6">
+<li><strong>FIN DEL SI</strong></li>
+</ol>
+<ol type="1" start="4">
+<li><strong>FIN DEL MIENTRAS</strong></li>
+<li>//Sacar todos los elementos de la pila y meterlos a la expresión postfija</li>
+<li><strong>MIENTRAS (</strong>PILA no está vacía <strong>) HACER</strong></li>
+</ol>
+<ol type="1" start="1">
+<li>operador = pop(pila)</li>
+<li>Agregar operador a expresión postfija</li>
+</ol>
+<ol type="1" start="7">
+<li><strong>FIN DEL MIENTRAS</strong></li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creando nuestra Pila" duration="10">
+        <p>No es parte de este tutorial la explicación de la estructura de datos PILA, ni la escritura del código correspondiente por lo que es tarea del lector leer y crear su estructura PILA.</p>
+<p>Si requieres aprender sobre la Estructura de Datos PILA, puedes ir  al siguiente video donde se explica cómo crear una pila estática en Lenguaje C.</p>
+<iframe class="youtube-video" src="https://www.youtube.com/embed/GueDcAJ3J28?rel=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>A continuación se proporciona el código de la PILA a utilizar en este tutorial. </p>
+<p>pila.h</p>
+<pre><code>#include &lt;stdlib.h&gt;
+#define MAX_ELEMENTOS 10
+typedef struct pila{
+      int indice;
+      int total;
+      char datos[MAX_ELEMENTOS];
+}Pila;
+
+Pila * crear(){
+        Pila *p;
+        p=(Pila *)malloc(sizeof(Pila));
+        p-&gt;indice=0;
+        p-&gt;total=0;
+        return p;
+}
+
+int estaVacia(Pila pila){
+        if(pila.total==0){
+                return 1;
+        }else{
+                return 0;
+        }
+}
+
+int estaLlena(Pila pila){
+        if(pila.total==MAX_ELEMENTOS){
+                return 1;
+        }else{
+                return 0;
+        }
+}
+
+int push(Pila *pila, char dato){
+        if(pila-&gt;total&lt;MAX_ELEMENTOS){
+                pila-&gt;datos[pila-&gt;indice]=dato;
+                pila-&gt;indice++;
+                pila-&gt;total++;
+                return 1;
+        }else{
+                return 0;
+        }
+}
+
+char pop(Pila *pila){
+        int aux;
+        if(pila-&gt;total&gt;0){
+                aux=pila-&gt;datos[pila-&gt;indice-1];
+                pila-&gt;indice--;
+                pila-&gt;total--;
+                return aux;
+        }else{
+                return -1;
+        }        
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creando nuestra función para convertir de infija a postfija" duration="20">
+        <p>Para facilitar la reutilización de código, vamos a crear en una librería externa todo el código para realizar la conversión de expresiones de infija a postfija </p>
+<p>Crearemos un archivo postfija.h donde crearemos la función infijaToPostfija y las funciones necesarias para la realización del algoritmo.</p>
+<h3 is-upgraded><strong>Creando la función nivelDePrecedencia.</strong></h3>
+<p><code>Esta función nos permitirá conocer el nivel de precedencia que tiene un operador, pudiendo ser 1 si es suma o resta, 2 si es producto o división, y 3 si es una potencia.</code></p>
+<p><code>Así la función tendría la siguiente estructura:</code></p>
+<p><strong><code>int nivelDePrecedencia(char operador);</code></strong></p>
+<p><code>Dónde operador es el operador a obtener su nivel de precedencia.</code></p>
+<p><strong><code>Función nivelDePrecedencia</code></strong></p>
+<pre><code>int nivelDePrecedencia(char operador){
+        int nivel=0;
+        switch(operador){
+                case &#39;+&#39;: nivel =1; 
+                          break;
+                case &#39;-&#39;: nivel =1; 
+                          break;
+                case &#39;*&#39;: nivel =2; 
+                          break;
+                case &#39;/&#39;: nivel =2; 
+                          break;
+                case &#39;$&#39;: nivel =3;//NOS SERVIRÁ PARA LA POTENCIA 
+                          break;                
+        }
+        return nivel;
+}</code></pre>
+<h3 is-upgraded><strong>Creando la función tieneMayorOIgualPrioridad.</strong></h3>
+<p>Esta función verifica si el primer operador enviado como primer argumento tiene mayor o igual prioridad que el segundo operador enviado como segundo argumento.</p>
+<p>Usaremos la siguiente tabla para la prioridad de operadores</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Operador</p>
+</td><td colspan="1" rowspan="1"><p>Nivel de Prioridad</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Potencia</p>
+</td><td colspan="1" rowspan="1"><p> 3 (Prioridad más alta)</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Multiplicación / división</p>
+</td><td colspan="1" rowspan="1"><p>2</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Suma / resta</p>
+</td><td colspan="1" rowspan="1"><p>1    (Prioridad más baja)</p>
+</td></tr>
+</table>
+<p>Así la función tendría la siguiente estructura </p>
+<p><strong>int tieneMayorOIgualPrioridad (char operador1, char operador2);</strong></p>
+<p>La función nos devuelve 1 (true) si el primer argumento (operador) tiene mayor o igual prioridad que el segundo argumento (operador), la función devuelve 0 (false) en caso contrario.</p>
+<pre><code>int tieneMayorOIgualPrioridad(char operador1, char operador2){
+        int precedenciaPrimerOperador=nivelDePrecedencia(operador1);
+        int precedenciaSegundoOperador=nivelDePrecedencia(operador2);
+        if(precedenciaPrimerOperador&gt;=precedenciaSegundoOperador){
+                return 1;
+        }else{
+                return 0;
+        }        
+}</code></pre>
+<h3 is-upgraded><strong>Creando la función esOperador</strong></h3>
+<p>Esta función nos servirá para saber si un elemento tomado de la expresión infija se trata de un operador.</p>
+<p>La función recibirá un argumento de tipo char y retornará 1(true) si el argumento es un operador, o 0 (false) en caso contrario.</p>
+<p>La estructura de la función es:</p>
+<p><strong>int esOperador(char elemento);</strong></p>
+<pre><code>int esOperador(char elemento){
+        if(elemento == &#39;+&#39; || 
+           elemento == &#39;-&#39; ||
+           elemento == &#39;*&#39; ||
+           elemento == &#39;/&#39; ||
+           elemento == &#39;$&#39;
+           ){
+                return 1;
+        }else{
+                return 0;
+        }        
+}</code></pre>
+<h3 is-upgraded><strong>Creando la función esOperando</strong></h3>
+<p>Esta función nos servirá para saber si un elemento tomado de la expresión infija se trata de un operando.</p>
+<p>La función recibirá un argumento de tipo char y retorna un 1 (true) si el argumento es un operando, o 0 (false) en caso contrario.</p>
+<p>La firma de la función es:</p>
+<p><strong>int esOperando(char elemento);</strong></p>
+<pre><code>int esOperando(char elemento){
+        if(elemento &gt;=&#39;0&#39; &amp;&amp; elemento &lt;=&#39;9&#39;   ){
+                return 1;
+        }else{
+                return 0;
+        }        
+}</code></pre>
+<h3 is-upgraded><strong>Creando la función infijaToPostfija</strong></h3>
+<p>No olvidemos que ya que vamos a utilizar la pila creada en la librería pila.h, debemos hacer el include correspondiente.</p>
+<p>Esta función recibe una cadena de caracteres que es la expresión infija y nos retorna una cadena de caracteres con la expresión en postfija.</p>
+<p>Así la estructura de la función sería:</p>
+<p><strong>char * infijaToPostfija(char * infija);</strong></p>
+<p>Conversión paso a paso del algoritmo al código</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Línea</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>Asignar una cadena vacía a la expresión postfija</p>
+</td><td colspan="1" rowspan="1"><p>char  *postfija;        postfija=malloc(sizeof(char)*100);</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>MIENTRAS</strong> hay elementos en la <strong>expresión HACER</strong></p>
+</td><td colspan="1" rowspan="1"><p>int i=0;</p>
+<p>int longitud= strlen(infija);</p>
+<p>while (i&lt;longitud){</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><ol type="1" start="3">
+<li>Guardar en  <strong>elemento</strong> al siguiente elemento de la expresión.</li>
+</ol>
+</td><td colspan="1" rowspan="1"><p>elemento= infija[i];</p>
+<p>i++;</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>SI</strong> (<strong>elemento</strong> es operando)</p>
+</td><td colspan="1" rowspan="1"><p>if(esOperando(elemento)){</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>Agregar <strong>elemento</strong> a expresión postfija</p>
+</td><td colspan="1" rowspan="1"><p>postfija[j]=elemento;</p>
+<p>j++;</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>SI NO, SI (elemento es operador)</strong></p>
+</td><td colspan="1" rowspan="1"><p>}else if (esOperador(elemento)){</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>SI  (</strong>PILA no está vacía)</p>
+</td><td colspan="1" rowspan="1"><p>if(!estaVacia(*pila)){</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>HACER</strong></p>
+</td><td colspan="1" rowspan="1"><p>int seDebeContinuar;</p>
+<p>do{</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>operador = pop(pila)</strong></p>
+</td><td colspan="1" rowspan="1"><p>operador=pop(pila);</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>SI ( operador tiene mayor o igual Prioridad que elemento)</strong></p>
+</td><td colspan="1" rowspan="1"><p>if(tieneMayorOIgualPrioridad(operador, elemento)){</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>Agregar elemento a expresión postfija</strong></p>
+</td><td colspan="1" rowspan="1"><p>postfija[j]=operador;                        </p>
+<p>j++;</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>Bandera seDebeContinuar=true</strong></p>
+</td><td colspan="1" rowspan="1"><p>seDebeContinuar=1;</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>SINO</strong></p>
+</td><td colspan="1" rowspan="1"><p>}else{</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>Bandera seDebeContinuar=false</strong></p>
+</td><td colspan="1" rowspan="1"><p>seDebeContinuar=0;</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>Insertar operador a la pila </p>
+</td><td colspan="1" rowspan="1"><p>push(pila,operador);</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>FIN DEL SI</strong></p>
+</td><td colspan="1" rowspan="1"><p>}</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>FIN DEL MIENTRAS (PILA no está vacía  y   seDebeContinuar)</strong></p>
+</td><td colspan="1" rowspan="1"><p>}while(!estaVacia(*pila) &amp;&amp; seDebeContinuar);</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>FIN DEL SI</strong></p>
+</td><td colspan="1" rowspan="1"><p>}</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>Insertar elemento a la pila </strong></p>
+</td><td colspan="1" rowspan="1"><p>push(pila,elemento);        </p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>SI NO, SI (elemento es  paréntesis izquierdo)</strong></p>
+</td><td colspan="1" rowspan="1"><p>}else if (elemento == &#39;(&#39;){</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>Insertar elemento a la pila </p>
+</td><td colspan="1" rowspan="1"><p><strong>push(pila,elemento);</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>SI NO,SI (elemento es paréntesis derecho)</p>
+</td><td colspan="1" rowspan="1"><p><strong>}else if (elemento == &#39;)&#39;){</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>operador = pop(pila)</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>operador=pop(pila);</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>MIENTRAS ( PILA no está vacía y operador no es paréntesis izquierdo)) HACER</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>while(!estaVacia(*pila) &amp;&amp; operador!=&#39;(&#39;) {</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>Agregar operador a expresión postfija</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>postfija[j]=operador;</strong></p>
+<p><strong>j++;</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>operador = pop(pila)</p>
+</td><td colspan="1" rowspan="1"><p>operador=pop(pila);</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>FIN DEL MIENTRAS</strong></p>
+</td><td colspan="1" rowspan="1"><p>}</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>FIN DEL SI</strong></p>
+</td><td colspan="1" rowspan="1"><p>}</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>FIN DEL MIENTRAS</p>
+</td><td colspan="1" rowspan="1"><p>}</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>//Sacar todos los elementos de la pila y meterlos a la expresión postfija</p>
+</td><td colspan="1" rowspan="1"><p>//Sacar todos los elementos de la pila y meterlos a la expresión postfija</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>MIENTRAS (PILA no está vacía ) HACER</strong></p>
+</td><td colspan="1" rowspan="1"><p>while(!estaVacia(*pila)) {</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>operador = pop(pila)</strong></p>
+</td><td colspan="1" rowspan="1"><p>operador=pop(pila);</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>Agregar operador a expresión postfija</strong></p>
+</td><td colspan="1" rowspan="1"><p>postfija[j]=operador;</p>
+<p>j++;</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p><strong>FIN DEL MIENTRAS</strong></p>
+</td><td colspan="1" rowspan="1"><p>}</p>
+</td></tr>
+</table>
+<p>char * infijaToPostfija(char * infija)</p>
+<pre><code>char* infijaToPostfija(char * infija){
+        char elemento,operador;
+        char  *postfija;
+        postfija=malloc(sizeof(char)*100);        
+        int j=0;
+        int i=0;
+        Pila *pila=crear();
+        int longitud= strlen(infija);
+        while (i&lt;longitud){
+                elemento= infija[i];
+                i++;                
+                if(esOperando(elemento)){
+                        postfija[j]=elemento;
+                        j++;
+                }else if (esOperador(elemento)){
+                        if(!estaVacia(*pila)){
+                                int seDebeContinuar;
+                                do{                                
+                                        operador=pop(pila);
+                                    if(tieneMayorOIgualPrioridad(operador, elemento)){        
+                                                postfija[j]=operador;
+                                                j++;                                                
+                                                seDebeContinuar=1;
+                                        }else{
+                                                seDebeContinuar=0;
+                                                push(pila,operador);
+                                        }                                        
+                                }while(!estaVacia(*pila) &amp;&amp; seDebeContinuar);                                
+                        }
+                        push(pila,elemento);                        
+                }else if (elemento == &#39;(&#39;){
+                        push(pila,elemento);
+                }else if (elemento == &#39;)&#39;){                        
+                        operador=pop(pila);
+                        while(!estaVacia(*pila) &amp;&amp; operador!=&#39;(&#39;) {
+                                postfija[j]=operador;
+                                j++;
+                                operador=pop(pila);
+                        }
+                }                
+        }
+        while(!estaVacia(*pila)) {
+                operador=pop(pila);
+                postfija[j]=operador;
+                j++;                        
+        }
+        postfija[j]=&#39;\0&#39;;
+    return postfija;        
+}
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Probando la función" duration="2">
+        <p>Ahora que tenemos nuestras librerías con las funciones necesarias, podemos probar nuestra función para convertir una expresión infija a postfija,recordemos que la función infijaToPostfija espera como argumento una expresión infija bien formada, así que será trabajo de otra función verificar que la expresión no tiene errores de sintaxis.</p>
+<p>Para probar nuestra función, será necesario crear un cliente que mande a llamar a la función.</p>
+<p>Para verificar que los resultados son correctos, probaremos con los ejemplos que se plantearon al principio de este tutorial. Para que podamos probar las expresiones, sustituiremos los valores de las literales por un dígito.</p>
+<h2 is-upgraded><strong>Ejemplo 1.  A + B   </strong></h2>
+<h2 is-upgraded>Resultado Esperado:  <strong>AB+</strong></h2>
+<p>cliente.c</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &#34;postfija.h&#34;
+int main(){
+        char cadena[]=&#34;1 + 5 &#34;;
+        char *postfija;
+        postfija=infijaToPostfija(cadena);
+        printf(&#34;%s&#34;,postfija);
+        return 0;
+}</code></pre>
+<p>El resultado obtenido es correcto.</p>
+<p class="image-container"><img style="width: 417.00px" src="img/ca4db1bc5e6d7e5d.png"></p>
+<h2 is-upgraded><strong>Ejemplo 2 :  A + B * D  </strong></h2>
+<h2 is-upgraded>Resultado Esperado: <strong> A B D * +</strong></h2>
+<p>cliente.c</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &#34;postfija.h&#34;
+int main(){
+        char cadena[]=&#34;1+5*6&#34;;
+        char *postfija;
+        postfija=infijaToPostfija(cadena);
+        printf(&#34;%s&#34;,postfija);
+        return 0;
+}</code></pre>
+<p>El resultado obtenido es correcto.</p>
+<p class="image-container"><img style="width: 430.00px" src="img/7e90d51433a902c4.png"></p>
+<h2 is-upgraded><strong>Ejemplo 3:  A + C + D*F +  A  </strong></h2>
+<h2 is-upgraded>Resultado Esperado:  <strong>A C + D F * + A +</strong></h2>
+<p>cliente.c</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &#34;postfija.h&#34;
+int main(){        
+        char cadena[]=&#34;1+5+6*3+1&#34;;
+        char *postfija;
+        postfija=infijaToPostfija(cadena);
+        printf(&#34;%s&#34;,postfija);
+        return 0;
+}</code></pre>
+<p>El resultado obtenido es correcto.</p>
+<p class="image-container"><img style="width: 430.00px" src="img/1f926239d2c34072.png"></p>
+<h2 is-upgraded>Ejemplo 4:  A + B * (C + D) </h2>
+<h2 is-upgraded>Resultado Esperado:  A B C D + * +</h2>
+<p>cliente.c</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &#34;postfija.h&#34;
+int main(){                
+        char cadena[]=&#34;1+5*(3+4)&#34;;
+        char *postfija;
+        postfija=infijaToPostfija(cadena);
+        printf(&#34;%s&#34;,postfija);
+        return 0;
+}</code></pre>
+<p>El resultado obtenido es correcto.</p>
+<p class="image-container"><img style="width: 456.00px" src="img/57de59186fe73e38.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Terminamos" duration="0">
+        <p>Es tarea del lector probar el código con más expresiones aritméticas, también es tarea del lector ejecutar paso a paso el algoritmo para analizar el estado de la PILA en cada paso del algoritmo para su correcto y total entendimiento.</p>
+<p>La siguiente actividad será crear el código que permita evaluar expresiones aritméticas  postfijas.</p>
+<h2 is-upgraded><strong>¿ Y ahora qué más podemos hacer ?</strong></h2>
+<p>Puedes encontrar videos sobre programación en mi canal de youtube:<a href="https://www.youtube.com/elprofeariel" target="_blank">https://www.youtube.com/elprofeariel</a></p>
+<iframe class="youtube-video" src="https://www.youtube.com/embed/GueDcAJ3J28?rel=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
